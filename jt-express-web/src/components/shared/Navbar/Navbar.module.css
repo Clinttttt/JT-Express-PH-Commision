@@ -1,0 +1,164 @@
+.nav {
+  background-color: var(--color-primary);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--space-3) var(--content-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.brand {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.brandSub {
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.links {
+  display: flex;
+  gap: var(--space-6);
+  list-style: none;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.link {
+  font-size: var(--font-size-sm);
+  color: #fff;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.link:hover {
+  opacity: 1;
+}
+
+.linkActive {
+  opacity: 1;
+  font-weight: 600;
+  border-bottom: 2px solid #fff;
+  padding-bottom: 2px;
+}
+
+.authSection {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-left: var(--space-4);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.adminLinks {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.adminLink {
+  font-size: var(--font-size-xs);
+  color: #fff;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.adminLink:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.username {
+  font-size: var(--font-size-sm);
+  color: #fff;
+  opacity: 0.9;
+  white-space: nowrap;
+}
+
+.logoutBtn {
+  font-size: var(--font-size-xs);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.logoutBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.loginBtn {
+  font-size: var(--font-size-sm);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.loginBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+@media (max-width: 768px) {
+  .links {
+    gap: var(--space-4);
+  }
+  .link {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 640px) {
+  .inner {
+    flex-wrap: wrap;
+  }
+  .links {
+    width: 100%;
+    justify-content: flex-start;
+    order: 3;
+  }
+  .authSection {
+    width: 100%;
+    order: 4;
+  }
+  .userInfo {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .adminLinks {
+    width: 100%;
+    flex-direction: column;
+  }
+}

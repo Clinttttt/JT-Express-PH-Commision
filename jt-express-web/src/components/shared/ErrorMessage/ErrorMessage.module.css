@@ -1,0 +1,27 @@
+.wrapper {
+  background-color: var(--color-error-bg);
+  border: 1px solid #FECACA;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+}
+
+.message {
+  font-size: var(--font-size-sm);
+  color: var(--color-error-text);
+  font-weight: 500;
+}
+
+.retryBtn {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-error-text);
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.retryBtn:hover {
+  opacity: 0.75;
+}

@@ -1,0 +1,232 @@
+.form {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+  max-width: 600px;
+}
+
+.inputWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.input {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-base);
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.08);
+}
+
+.inputError {
+  border-color: var(--color-error-text);
+}
+
+.inputError:focus {
+  border-color: var(--color-error-text);
+  box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.08);
+}
+
+.errorText {
+  font-size: var(--font-size-xs);
+  color: var(--color-error-text);
+  margin-top: var(--space-1);
+}
+
+.btn {
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.result {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.trackingNum {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.badge {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.badgesuccess {
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
+}
+
+.badgeinfo {
+  background: var(--color-info-bg);
+  color: var(--color-info-text);
+}
+
+.badgewarning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+}
+
+.badgepurple {
+  background: #F5F3FF;
+  color: #5B21B6;
+}
+
+.badgeneutral {
+  background: var(--color-neutral-bg);
+  color: var(--color-neutral-text);
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.infoLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.infoValue {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+}
+
+.timelineTitle {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  margin-bottom: var(--space-5);
+}
+
+.timelineList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.timelineItem {
+  display: flex;
+  gap: var(--space-4);
+  position: relative;
+}
+
+.timelineItem:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 24px;
+  bottom: -20px;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.timelineDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.timelineDotActive {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.timelineContent {
+  flex: 1;
+}
+
+.timelineDate {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.timelineStatus {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-1);
+}
+
+.timelineLocation {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.trackAnotherBtn {
+  margin-top: var(--space-8);
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.trackAnotherBtn:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .form {
+    flex-direction: column;
+  }
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+}

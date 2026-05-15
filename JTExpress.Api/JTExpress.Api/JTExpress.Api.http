@@ -1,0 +1,6 @@
+@JTExpress.Api_HostAddress = http://localhost:5135
+
+GET {{JTExpress.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
