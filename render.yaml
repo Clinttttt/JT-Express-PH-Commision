@@ -3,8 +3,8 @@ services:
   - type: web
     name: jt-express-api
     runtime: dotnet
-    buildCommand: cd JTExpress.Api/JTExpress.Api && dotnet restore && dotnet publish -c Release -o out
-    startCommand: cd JTExpress.Api/JTExpress.Api/out && dotnet JTExpress.Api.dll
+    buildCommand: dotnet publish JTExpress.Api/JTExpress.Api/JTExpress.Api.csproj -c Release -o out
+    startCommand: dotnet out/JTExpress.Api.dll
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
@@ -25,7 +25,7 @@ services:
   - type: web
     name: jt-express-web
     runtime: static
-    buildCommand: cd jt-express-web && npm install && npm run build
+    buildCommand: npm install --prefix jt-express-web && npm run build --prefix jt-express-web
     staticPublishPath: ./jt-express-web/dist
     envVars:
       - key: VITE_API_BASE_URL
