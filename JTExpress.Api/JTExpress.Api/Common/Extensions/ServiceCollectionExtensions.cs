@@ -20,8 +20,17 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        
+        // Convert PostgreSQL URI to Npgsql connection string if needed
+        if (connectionString?.StartsWith("postgres") == true)
+        {
+            var uri = new Uri(connectionString);
+            connectionString = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={uri.UserInfo.Split(':')[0]};Password={uri.UserInfo.Split(':')[1]};SSL Mode=Require;Trust Server Certificate=true";
+        }
+        
         services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(connectionString));
 
         var allowedOrigins = configuration
             .GetSection("Cors:AllowedOrigins")
