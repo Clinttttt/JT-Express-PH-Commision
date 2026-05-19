@@ -1,5 +1,4 @@
 services:
-  # Backend API
   - type: web
     name: jt-express-api
     buildCommand: dotnet publish JTExpress.Api/JTExpress.Api/JTExpress.Api.csproj -c Release -o out
@@ -20,7 +19,6 @@ services:
       - key: Jwt__Audience
         value: JTExpressWeb
 
-  # Frontend
   - type: web
     name: jt-express-web
     buildCommand: bash build-frontend.sh
