@@ -8,7 +8,7 @@ services:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
       - key: ASPNETCORE_URLS
-        value: http://0.0.0.0:10000
+        value: http://0.0.0.0:$PORT
       - key: ConnectionStrings__DefaultConnection
         fromDatabase:
           name: jt-express-db
@@ -23,7 +23,6 @@ services:
   # Frontend
   - type: web
     name: jt-express-web
-    env: static
     buildCommand: bash build-frontend.sh
     staticPublishPath: ./jt-express-web/dist
     envVars:
