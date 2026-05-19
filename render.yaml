@@ -1,8 +1,8 @@
 services:
   - type: web
     name: jt-express-api
-    buildCommand: dotnet publish JTExpress.Api/JTExpress.Api/JTExpress.Api.csproj -c Release -o out
-    startCommand: dotnet out/JTExpress.Api.dll
+    runtime: docker
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
