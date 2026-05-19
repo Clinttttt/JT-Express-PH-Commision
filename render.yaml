@@ -1,0 +1,50 @@
+services:
+  # PostgreSQL Database
+  - type: pserv
+    name: jt-express-db
+    plan: free
+    env: docker
+    region: oregon
+    
+  # Backend API
+  - type: web
+    name: jt-express-api
+    runtime: dotnet
+    buildCommand: cd JTExpress.Api/JTExpress.Api && dotnet restore && dotnet publish -c Release -o out
+    startCommand: cd JTExpress.Api/JTExpress.Api/out && dotnet JTExpress.Api.dll
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://+:5000
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: jt-express-db
+          property: connectionString
+      - key: Jwt__Key
+        generateValue: true
+      - key: Jwt__Issuer
+        value: JTExpressApi
+      - key: Jwt__Audience
+        value: JTExpressWeb
+    healthCheckPath: /api/auth/setup-status
+
+  # Frontend
+  - type: web
+    name: jt-express-web
+    runtime: static
+    buildCommand: cd jt-express-web && npm install && npm run build
+    staticPublishPath: ./jt-express-web/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://jt-express-api.onrender.com/api
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+databases:
+  - name: jt-express-db
+    plan: free
+    databaseName: jtexpressdb
+    user: jtexpressuser

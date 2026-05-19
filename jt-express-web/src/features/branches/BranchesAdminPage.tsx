@@ -143,23 +143,28 @@ export default function BranchesAdminPage() {
               value={formData.hours}
               onChange={(e) => setFormData({ ...formData, hours: e.target.value })}
               required
+              style={{ marginTop: '22px' }}
             />
-            <input
-              type="number"
-              placeholder="Latitude"
-              step="0.0001"
-              value={formData.latitude}
-              onChange={(e) => setFormData({ ...formData, latitude: parseFloat(e.target.value) })}
-              required
-            />
-            <input
-              type="number"
-              placeholder="Longitude"
-              step="0.0001"
-              value={formData.longitude}
-              onChange={(e) => setFormData({ ...formData, longitude: parseFloat(e.target.value) })}
-              required
-            />
+            <div className={styles.formGroup}>
+              <label>Latitude</label>
+              <input
+                type="number"
+                step="0.0001"
+                value={formData.latitude}
+                onChange={(e) => setFormData({ ...formData, latitude: parseFloat(e.target.value) })}
+                required
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Longitude</label>
+              <input
+                type="number"
+                step="0.0001"
+                value={formData.longitude}
+                onChange={(e) => setFormData({ ...formData, longitude: parseFloat(e.target.value) })}
+                required
+              />
+            </div>
             {formError && <div className={styles.error}>{formError}</div>}
             <div className={styles.formActions}>
               <button type="submit" className={styles.submitBtn}>

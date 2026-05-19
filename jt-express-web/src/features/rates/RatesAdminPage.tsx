@@ -84,23 +84,28 @@ export default function RatesAdminPage() {
               value={formData.zone}
               onChange={(e) => setFormData({ ...formData, zone: e.target.value })}
               required
+              style={{ marginTop: '22px' }}
             />
-            <input
-              type="number"
-              placeholder="First Kg Rate"
-              step="0.01"
-              value={formData.firstKg}
-              onChange={(e) => setFormData({ ...formData, firstKg: parseFloat(e.target.value) })}
-              required
-            />
-            <input
-              type="number"
-              placeholder="Succeeding Kg Rate"
-              step="0.01"
-              value={formData.succeedingKg}
-              onChange={(e) => setFormData({ ...formData, succeedingKg: parseFloat(e.target.value) })}
-              required
-            />
+            <div className={styles.formGroup}>
+              <label>First Kg Rate</label>
+              <input
+                type="number"
+                step="0.01"
+                value={formData.firstKg}
+                onChange={(e) => setFormData({ ...formData, firstKg: parseFloat(e.target.value) })}
+                required
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Succeeding Kg Rate</label>
+              <input
+                type="number"
+                step="0.01"
+                value={formData.succeedingKg}
+                onChange={(e) => setFormData({ ...formData, succeedingKg: parseFloat(e.target.value) })}
+                required
+              />
+            </div>
             {formError && <div className={styles.error}>{formError}</div>}
             <div className={styles.formActions}>
               <button type="submit" className={styles.submitBtn}>

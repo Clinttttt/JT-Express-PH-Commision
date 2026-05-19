@@ -34,9 +34,20 @@
   margin-bottom: 15px;
 }
 
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  font-size: 12px;
+  color: #6c757d;
+  margin-bottom: 5px;
+}
+
 .form input,
 .form select {
-  padding: 10px;
+  padding: 8px 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;

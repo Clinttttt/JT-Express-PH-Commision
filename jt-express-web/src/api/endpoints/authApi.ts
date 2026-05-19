@@ -4,6 +4,7 @@ import type { ApiResponse } from "../../types";
 export interface LoginResponse {
   token: string;
   username: string;
+  restorationKey?: string;
 }
 
 export interface SetupStatusResponse {
@@ -28,5 +29,21 @@ export const login = async (username: string, password: string): Promise<LoginRe
     username,
     password,
   });
+  return res.data.data!;
+};
+
+export const requestPasswordReset = async (email: string): Promise<void> => {
+  await apiClient.post<ApiResponse<void>>("/auth/forgot-password", { email });
+};
+
+export const resetPassword = async (
+  username: string,
+  restorationKey: string,
+  newPassword: string
+): Promise<{ restorationKey: string }> => {
+  const res = await apiClient.post<ApiResponse<{ restorationKey: string }>>(
+    "/auth/reset-password",
+    { username, restorationKey, newPassword }
+  );
   return res.data.data!;
 };

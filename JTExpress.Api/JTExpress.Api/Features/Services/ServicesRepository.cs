@@ -14,7 +14,6 @@ public sealed class ServicesRepository(AppDbContext dbContext) : IServicesReposi
                 service.Id,
                 service.Name,
                 service.Description,
-                service.Icon,
                 service.PriceLabel))
             .ToListAsync();
     }
@@ -25,14 +24,13 @@ public sealed class ServicesRepository(AppDbContext dbContext) : IServicesReposi
         {
             Name = dto.Name,
             Description = dto.Description,
-            Icon = dto.Icon,
             PriceLabel = dto.PriceLabel
         };
 
         dbContext.Services.Add(entity);
         await dbContext.SaveChangesAsync();
 
-        return new ServiceDto(entity.Id, entity.Name, entity.Description, entity.Icon, entity.PriceLabel);
+        return new ServiceDto(entity.Id, entity.Name, entity.Description, entity.PriceLabel);
     }
 
     public async Task<ServiceDto?> UpdateAsync(int id, UpdateServiceDto dto)
@@ -45,13 +43,12 @@ public sealed class ServicesRepository(AppDbContext dbContext) : IServicesReposi
             Id = id,
             Name = dto.Name,
             Description = dto.Description,
-            Icon = dto.Icon,
             PriceLabel = dto.PriceLabel
         });
 
         await dbContext.SaveChangesAsync();
 
-        return new ServiceDto(entity.Id, entity.Name, entity.Description, entity.Icon, entity.PriceLabel);
+        return new ServiceDto(entity.Id, entity.Name, entity.Description, entity.PriceLabel);
     }
 
     public async Task<bool> DeleteAsync(int id)

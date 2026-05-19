@@ -1,76 +1,68 @@
 import { useState, type FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
-import { signup } from "../../api/endpoints/authApi";
-import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
+import { resetPassword } from "../../api/endpoints/authApi";
 import ErrorMessage from "../../components/shared/ErrorMessage/ErrorMessage";
 import styles from "./AuthPage.module.css";
 
-export default function SignupPage() {
-  const navigate = useNavigate();
-  const { login } = useAuth();
+export default function ForgotPasswordPage() {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [restorationKey, setRestorationKey] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [newKey, setNewKey] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [signupResult, setSignupResult] = useState<{ token: string; username: string; restorationKey: string } | null>(null);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    if (!username || !password || !confirmPassword) {
+    if (!username || !restorationKey || !newPassword || !confirmPassword) {
       setError("All fields are required.");
       return;
     }
 
-    if (password !== confirmPassword) {
+    if (newPassword !== confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
 
-    if (password.length < 6) {
+    if (newPassword.length < 6) {
       setError("Password must be at least 6 characters.");
       return;
     }
 
     setLoading(true);
     try {
-      const result = await signup(username, password);
-      setSignupResult(result as any);
+      const result = await resetPassword(username, restorationKey, newPassword);
+      setNewKey(result.restorationKey);
     } catch (err) {
       setError((err as Error).message);
+    } finally {
       setLoading(false);
     }
   };
 
-  const handleContinue = () => {
-    if (signupResult) {
-      login(signupResult.token, signupResult.username);
-      navigate("/services");
-    }
-  };
-
-  if (signupResult?.restorationKey) {
+  if (newKey) {
     return (
       <div className={styles.container}>
         <div className={styles.card}>
-          <h1 className={styles.title}>Save Your Restoration Key</h1>
+          <h1 className={styles.title}>Password Reset Successful</h1>
           <p className={styles.subtitle}>
-            Keep this key safe! You'll need it to recover your account if you forget your password.
+            Your password has been reset. Here's your new restoration key:
           </p>
           
           <div className={styles.keyBox}>
-            <code className={styles.keyCode}>{signupResult.restorationKey}</code>
+            <code className={styles.keyCode}>{newKey}</code>
           </div>
 
           <div className={styles.warningBox}>
-            <strong>⚠️ Important:</strong> Copy this key and store it securely. It will not be shown again.
+            <strong>⚠️ Important:</strong> Save this new key! Your old restoration key is no longer valid.
           </div>
 
-          <button onClick={handleContinue} className={styles.btn}>
-            I've Saved My Key, Continue
-          </button>
+          <Link to="/login" className={styles.btn}>
+            Go to Login
+          </Link>
         </div>
       </div>
     );
@@ -79,8 +71,8 @@ export default function SignupPage() {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h1 className={styles.title}>Create Admin Account</h1>
-        <p className={styles.subtitle}>Set up your admin account to manage services</p>
+        <h1 className={styles.title}>Reset Password</h1>
+        <p className={styles.subtitle}>Use your restoration key to reset your password</p>
 
         {error && <ErrorMessage message={error} />}
 
@@ -92,39 +84,55 @@ export default function SignupPage() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter username"
+              placeholder="Enter your username"
               required
             />
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="restorationKey">Restoration Key</label>
             <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password (min 6 characters)"
+              id="restorationKey"
+              type="text"
+              value={restorationKey}
+              onChange={(e) => setRestorationKey(e.target.value)}
+              placeholder="Enter your restoration key"
               required
             />
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="confirmPassword">Confirm Password</label>
+            <label htmlFor="newPassword">New Password</label>
+            <input
+              id="newPassword"
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="Enter new password (min 6 characters)"
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="confirmPassword">Confirm New Password</label>
             <input
               id="confirmPassword"
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm password"
+              placeholder="Confirm new password"
               required
             />
           </div>
 
           <button type="submit" className={styles.btn} disabled={loading}>
-            {loading ? "Creating Account..." : "Create Account"}
+            {loading ? "Resetting..." : "Reset Password"}
           </button>
         </form>
+
+        <Link to="/login" className={styles.backLink}>
+          Back to Login
+        </Link>
       </div>
     </div>
   );

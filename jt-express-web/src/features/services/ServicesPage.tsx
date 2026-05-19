@@ -12,7 +12,7 @@ export default function ServicesPage() {
   const { data, loading, error, refetch } = useServices();
   const [showForm, setShowForm] = useState(false);
   const [editingService, setEditingService] = useState<Service | null>(null);
-  const [formData, setFormData] = useState({ name: "", description: "", icon: "", priceLabel: "" });
+  const [formData, setFormData] = useState({ name: "", description: "", priceLabel: "" });
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,7 +27,7 @@ export default function ServicesPage() {
       }
       setShowForm(false);
       setEditingService(null);
-      setFormData({ name: "", description: "", icon: "", priceLabel: "" });
+      setFormData({ name: "", description: "", priceLabel: "" });
       refetch();
     } catch (err) {
       alert((err as Error).message);
@@ -41,7 +41,6 @@ export default function ServicesPage() {
     setFormData({
       name: service.name,
       description: service.description,
-      icon: service.icon,
       priceLabel: service.priceLabel,
     });
     setShowForm(true);
@@ -61,7 +60,7 @@ export default function ServicesPage() {
   const handleCancel = () => {
     setShowForm(false);
     setEditingService(null);
-    setFormData({ name: "", description: "", icon: "", priceLabel: "" });
+    setFormData({ name: "", description: "", priceLabel: "" });
   };
 
   return (
@@ -96,15 +95,6 @@ export default function ServicesPage() {
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                required
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label>Icon (emoji or text)</label>
-              <input
-                type="text"
-                value={formData.icon}
-                onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
                 required
               />
             </div>
@@ -145,7 +135,6 @@ export default function ServicesPage() {
                   </button>
                 </div>
               )}
-              <div className={styles.icon}>{service.icon}</div>
               <h3 className={styles.name}>{service.name}</h3>
               <p className={styles.description}>{service.description}</p>
               <span className={styles.price}>{service.priceLabel}</span>

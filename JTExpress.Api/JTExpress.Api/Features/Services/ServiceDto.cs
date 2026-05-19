@@ -4,17 +4,14 @@ public sealed record ServiceDto(
     int Id,
     string Name,
     string Description,
-    string Icon,
     string PriceLabel);
 
 public sealed record CreateServiceDto(
     string Name,
     string Description,
-    string Icon,
     string PriceLabel);
 
 public sealed record UpdateServiceDto(
     string Name,
     string Description,
-    string Icon,
     string PriceLabel);

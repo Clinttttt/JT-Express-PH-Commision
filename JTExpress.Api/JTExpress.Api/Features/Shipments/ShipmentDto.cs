@@ -8,7 +8,7 @@ public sealed record ShipmentDto(
     string Recipient,
     string EstimatedDelivery,
     string CurrentLocation,
-    List<TrackingEventDto> Timeline);
+    List<ShipmentEventDto> Timeline);
 
 public sealed record CreateShipmentDto(
     string TrackingNumber,
@@ -20,7 +20,7 @@ public sealed record UpdateShipmentDto(
     string Status,
     string CurrentLocation);
 
-public sealed record TrackingEventDto(
+public sealed record ShipmentEventDto(
     int Id,
     string Date,
     string Status,

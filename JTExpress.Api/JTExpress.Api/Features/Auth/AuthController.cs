@@ -46,4 +46,25 @@ public sealed class AuthController(IAuthService authService) : ControllerBase
 
         return Ok(ApiResponse<LoginResponse>.Ok(result));
     }
+
+    [HttpPost("reset-password")]
+    [ProducesResponseType(typeof(ApiResponse<ResetPasswordResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+    {
+        if (string.IsNullOrWhiteSpace(request.Username) || 
+            string.IsNullOrWhiteSpace(request.RestorationKey) || 
+            string.IsNullOrWhiteSpace(request.NewPassword))
+            return BadRequest(ApiResponse<object>.Fail("All fields are required."));
+
+        if (request.NewPassword.Length < 6)
+            return BadRequest(ApiResponse<object>.Fail("Password must be at least 6 characters."));
+
+        var result = await authService.ResetPasswordAsync(request.Username, request.RestorationKey, request.NewPassword);
+        
+        if (result is null)
+            return BadRequest(ApiResponse<object>.Fail("Invalid username or restoration key."));
+
+        return Ok(ApiResponse<ResetPasswordResponse>.Ok(result));
+    }
 }

@@ -88,7 +88,7 @@ public sealed class ShipmentsRepository(AppDbContext dbContext) : IShipmentsRepo
     {
         var timeline = entity.Timeline
             .OrderByDescending(e => e.Id)
-            .Select(e => new TrackingEventDto(e.Id, e.Date, e.Status, e.Location))
+            .Select(e => new ShipmentEventDto(e.Id, e.Date, e.Status, e.Location))
             .ToList();
 
         return new ShipmentDto(

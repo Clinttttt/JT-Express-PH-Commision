@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\Pictures\\COMMISSION_1\\JTExpress.Api\\JTExpress.Api\\JTExpress.Api.csproj": {}
+    "C:\\Users\\HomePC\\JT-Express-PH-Commision\\JTExpress.Api\\JTExpress.Api\\JTExpress.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\Pictures\\COMMISSION_1\\JTExpress.Api\\JTExpress.Api\\JTExpress.Api.csproj": {
+    "C:\\Users\\HomePC\\JT-Express-PH-Commision\\JTExpress.Api\\JTExpress.Api\\JTExpress.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Pictures\\COMMISSION_1\\JTExpress.Api\\JTExpress.Api\\JTExpress.Api.csproj",
+        "projectUniqueName": "C:\\Users\\HomePC\\JT-Express-PH-Commision\\JTExpress.Api\\JTExpress.Api\\JTExpress.Api.csproj",
         "projectName": "JTExpress.Api",
-        "projectPath": "C:\\Users\\Administrator\\Pictures\\COMMISSION_1\\JTExpress.Api\\JTExpress.Api\\JTExpress.Api.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Pictures\\COMMISSION_1\\JTExpress.Api\\JTExpress.Api\\obj\\",
+        "projectPath": "C:\\Users\\HomePC\\JT-Express-PH-Commision\\JTExpress.Api\\JTExpress.Api\\JTExpress.Api.csproj",
+        "packagesPath": "C:\\Users\\HomePC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HomePC\\JT-Express-PH-Commision\\JTExpress.Api\\JTExpress.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HomePC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -58,10 +59,6 @@
               "target": "Package",
               "version": "[9.0.0, )"
             },
-            "Microsoft.AspNetCore.OpenApi": {
-              "target": "Package",
-              "version": "[9.0.15, )"
-            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.4, )"
@@ -73,6 +70,10 @@
               "version": "[9.0.4, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[9.0.4, )"
             }
@@ -88,6 +89,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[9.0.14, 9.0.14]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -96,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

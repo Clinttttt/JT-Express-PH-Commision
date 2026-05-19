@@ -1,6 +1,6 @@
-import { useState, type FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
-import { login as loginApi } from "../../api/endpoints/authApi";
+import { useState, useEffect, type FormEvent } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { login as loginApi, checkSetupStatus } from "../../api/endpoints/authApi";
 import { useAuth } from "../../context/AuthContext";
 import ErrorMessage from "../../components/shared/ErrorMessage/ErrorMessage";
 import styles from "./AuthPage.module.css";
@@ -12,6 +12,14 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    checkSetupStatus().then((status) => {
+      if (!status.hasAdmin) {
+        navigate("/signup");
+      }
+    });
+  }, [navigate]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -65,6 +73,9 @@ export default function LoginPage() {
               placeholder="Enter password"
               required
             />
+            <Link to="/forgot-password" className={styles.forgotLink}>
+              Forgot password?
+            </Link>
           </div>
 
           <button type="submit" className={styles.btn} disabled={loading}>
