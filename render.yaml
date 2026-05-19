@@ -2,14 +2,14 @@ services:
   # Backend API
   - type: web
     name: jt-express-api
-    runtime: dotnet
+    env: dotnet
     buildCommand: dotnet publish JTExpress.Api/JTExpress.Api/JTExpress.Api.csproj -c Release -o out
     startCommand: dotnet out/JTExpress.Api.dll
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
       - key: ASPNETCORE_URLS
-        value: http://+:5000
+        value: http://0.0.0.0:$PORT
       - key: ConnectionStrings__DefaultConnection
         fromDatabase:
           name: jt-express-db
@@ -24,7 +24,7 @@ services:
   # Frontend
   - type: web
     name: jt-express-web
-    runtime: static
+    env: static
     buildCommand: bash build-frontend.sh
     staticPublishPath: ./jt-express-web/dist
     envVars:
