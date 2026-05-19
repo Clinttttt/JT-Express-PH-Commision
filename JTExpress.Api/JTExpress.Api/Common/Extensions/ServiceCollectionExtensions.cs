@@ -20,8 +20,16 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        
+        // Add SSL mode for production (Render requires it)
+        if (!connectionString!.Contains("SSL Mode", StringComparison.OrdinalIgnoreCase))
+        {
+            connectionString += ";SSL Mode=Require;Trust Server Certificate=true";
+        }
+        
         services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(connectionString));
 
         var allowedOrigins = configuration
             .GetSection("Cors:AllowedOrigins")

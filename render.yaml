@@ -18,6 +18,8 @@ services:
         value: JTExpressApi
       - key: Jwt__Audience
         value: JTExpressWeb
+      - key: Cors__AllowedOrigins__0
+        value: https://jt-express-web.onrender.com
 
   - type: web
     name: jt-express-web
