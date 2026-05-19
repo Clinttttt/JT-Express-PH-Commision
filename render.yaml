@@ -2,14 +2,13 @@ services:
   # Backend API
   - type: web
     name: jt-express-api
-    env: dotnet
     buildCommand: dotnet publish JTExpress.Api/JTExpress.Api/JTExpress.Api.csproj -c Release -o out
     startCommand: dotnet out/JTExpress.Api.dll
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
       - key: ASPNETCORE_URLS
-        value: http://0.0.0.0:$PORT
+        value: http://0.0.0.0:10000
       - key: ConnectionStrings__DefaultConnection
         fromDatabase:
           name: jt-express-db
