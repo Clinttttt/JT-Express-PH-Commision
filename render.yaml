@@ -25,7 +25,7 @@ services:
   - type: web
     name: jt-express-web
     runtime: static
-    buildCommand: npm install --prefix jt-express-web && npm run build --prefix jt-express-web
+    buildCommand: npm install --prefix jt-express-web; npm run build --prefix jt-express-web
     staticPublishPath: ./jt-express-web/dist
     envVars:
       - key: VITE_API_BASE_URL
