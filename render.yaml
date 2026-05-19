@@ -1,11 +1,4 @@
 services:
-  # PostgreSQL Database
-  - type: pserv
-    name: jt-express-db
-    plan: free
-    env: docker
-    region: oregon
-    
   # Backend API
   - type: web
     name: jt-express-api
@@ -27,7 +20,6 @@ services:
         value: JTExpressApi
       - key: Jwt__Audience
         value: JTExpressWeb
-    healthCheckPath: /api/auth/setup-status
 
   # Frontend
   - type: web
@@ -45,6 +37,5 @@ services:
 
 databases:
   - name: jt-express-db
-    plan: free
     databaseName: jtexpressdb
     user: jtexpressuser
